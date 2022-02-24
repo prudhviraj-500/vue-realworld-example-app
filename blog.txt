@@ -1,0 +1,44 @@
+                        navbar_header
+            app_image                 unordered_list(drop down menu)                   button
+            
+                    ordered list(url for the website)
+
+                    header                              
+        
+        ex-: Best AI Content Generator in 2022
+        
+        
+                    text
+           ex: describing the header above                                                container(To hold the 500apps all in one suite image and all the app names in 500apps)
+
+                    image
+
+                    text
+
+
+container
+(to hold social_network types)
+                    
+                    
+                    image
+
+                    header 
+        
+        ex-:  Our Thoughts On The Best AI Content Generator Tool
+        
+                    text                      
+
+                    header
+
+                    text
+                                                                                            chat_icon
+                    
+                    pre-footer(input , button to get started with 500apps)
+                        
+
+                    footer
+                        div ( containing features , blogs , contact info)
+
+
+
+                      
