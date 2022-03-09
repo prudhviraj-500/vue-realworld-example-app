@@ -1,50 +1,27 @@
-name: 
+name: AUTO-SYNC_MASTER_DEVELOP
+
 on:
   workflow_dispatch:
-    inputs:
-      branch_name:
-        description: 'Please provide the exact branch name'     
-        required: true
-     
-  #pull_request:
-    #types: [closed]
-    #branches:
-     # - master
-
+  
 jobs:
-  build:
+  sync-branches:
     runs-on: ubuntu-20.04
-    env:
-      BRANCH_NAME: ${{ github.event.inputs.branch_name }}
-
+    name: Syncing branches
     steps:
-      - name: Check out Git repository
+      - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Set up Node
+        uses: actions/setup-node@v1
         with:
-          ref: master
-
-    
+          node-version: 12
       
-      - name: branch name
-        id: branch
-        run: |
-          git fetch --all
-          git checkout -b ${{ env.BRANCH_NAME }}
-          git pull origin ${{ env.BRANCH_NAME }} --rebase
-          #git rebase --skip
-          feature=$(echo "${{ env.BRANCH_NAME}}" | cut -d "-" -f 2)
-          echo "::set-output name=feature_name::$feature"
-          echo "$feature" 
+      - name: Opening pull request
+        id: pull
+        uses: tretuna/sync-branches@1.2.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: 'master'
+          TO_BRANCH: 'develop'
       
-
-      - name: building infinity
-        run: |
-          yarn install
-          yarn run build
-        shell: bash
-
-      - name: creating index.html versioning i.e index-<tag#>
-        run: |
-          ls -al
-        #  cp public/index.html public/index-feature-${{ steps.branch.outputs.feature_name }}
-       # shell: bash
+        
