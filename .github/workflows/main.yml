@@ -1,25 +1,17 @@
-name: AUTO-SYNC_MASTER_DEVELOP
-
+name: Sync multiple branches
 on:
   workflow_dispatch:
   
 jobs:
-  sync-branches:
-    runs-on: ubuntu-20.04
-    name: Syncing branches
+  sync-branch:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Set up Node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@master
         with:
-          node-version: 12
-      
-      - name: Opening pull request
-        run: |
-          git checkout master
-          git pull
-          git checkout develop
-          git merge master
-        
+          type: now
+          from_branch: master
+          target_branch: develop
+          
