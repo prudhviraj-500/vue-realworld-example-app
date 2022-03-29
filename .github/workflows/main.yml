@@ -8,10 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Merge development -> staging
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: master
-          target_branch: dev
-          
+      - name: downloading swagger codegen
+        run: |
+          wget https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.33/swagger-codegen-cli-3.0.33.jar -O swagger-codegen-cli.jar 
+          java -jar swagger-codegen-cli.jar version 
