@@ -9,7 +9,7 @@ jobs:
       - name: xmllint
         run: |
           sudo apt-get install libxml2-utils -y
-          curl https://finder.io/sitemap.xml > file.xml
+          curl https://openedornot.com/sitemap.xml > file.xml
           if xmllint --noout file.xml > /dev/null 2>&1; 
           then
             var=green
