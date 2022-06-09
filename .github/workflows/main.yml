@@ -6,10 +6,15 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: downloading swagger codegen
+      - name: xmllint
         run: |
-          wget https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.33/swagger-codegen-cli-3.0.33.jar -O swagger-codegen-cli.jar 
-          java -jar swagger-codegen-cli.jar version 
-          zip -j static.zip static
+          sudo apt-get install libxml2-utils -y
+          curl https://openedornot.com/sitemap.xml > file.xml
+          if xmllint --noout file.xml > /dev/null 2>&1; 
+          then
+            var=green
+            echo "$var"
+          else
+            var=red
+            echo "$var"
+          fi
